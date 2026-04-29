@@ -10,6 +10,8 @@ import ProductDetail from "./pages/ProductDetail.tsx";
 import Latest from "./pages/Latest.tsx";
 import Contact from "./pages/Contact.tsx";
 import About from "./pages/About.tsx";
+import Auth from "./pages/Auth.tsx";
+import Admin from "./pages/Admin.tsx";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +28,8 @@ const App = () => (
           <Route path="/terbaru" element={<Latest />} />
           <Route path="/kontak" element={<Contact />} />
           <Route path="/tentang" element={<About />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/admin" element={<Admin />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

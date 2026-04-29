@@ -14,16 +14,68 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      products: {
+        Row: {
+          badge: Database["public"]["Enums"]["product_badge"] | null
+          category: Database["public"]["Enums"]["product_category"]
+          created_at: string
+          description: string
+          id: string
+          images: string[]
+          location: string
+          price: number
+          price_unit: string | null
+          slug: string
+          status: Database["public"]["Enums"]["product_status"]
+          title: string
+          updated_at: string
+          whatsapp: string
+        }
+        Insert: {
+          badge?: Database["public"]["Enums"]["product_badge"] | null
+          category: Database["public"]["Enums"]["product_category"]
+          created_at?: string
+          description: string
+          id?: string
+          images?: string[]
+          location: string
+          price: number
+          price_unit?: string | null
+          slug: string
+          status?: Database["public"]["Enums"]["product_status"]
+          title: string
+          updated_at?: string
+          whatsapp: string
+        }
+        Update: {
+          badge?: Database["public"]["Enums"]["product_badge"] | null
+          category?: Database["public"]["Enums"]["product_category"]
+          created_at?: string
+          description?: string
+          id?: string
+          images?: string[]
+          location?: string
+          price?: number
+          price_unit?: string | null
+          slug?: string
+          status?: Database["public"]["Enums"]["product_status"]
+          title?: string
+          updated_at?: string
+          whatsapp?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: { Args: never; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      product_badge: "hot" | "new"
+      product_category: "kost" | "kontrakan" | "motor" | "barang"
+      product_status: "available" | "sold"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +202,10 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      product_badge: ["hot", "new"],
+      product_category: ["kost", "kontrakan", "motor", "barang"],
+      product_status: ["available", "sold"],
+    },
   },
 } as const

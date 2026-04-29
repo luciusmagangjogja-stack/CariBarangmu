@@ -5,12 +5,14 @@ import { Layout } from "@/components/marketplace/Layout";
 import { ImageSlider } from "@/components/marketplace/ImageSlider";
 import { WhatsappButton } from "@/components/marketplace/WhatsappButton";
 import { ProductCard } from "@/components/marketplace/ProductCard";
-import { categories, formatPrice, products } from "@/data/products";
+import { categories, formatPrice } from "@/data/products";
+import { useProductBySlug, useProducts } from "@/hooks/useProducts";
 import { toast } from "sonner";
 
 const ProductDetail = () => {
   const { slug } = useParams();
-  const product = products.find((p) => p.slug === slug);
+  const { data: product, isLoading } = useProductBySlug(slug);
+  const { data: all = [] } = useProducts(product?.category);
 
   useEffect(() => {
     if (product) {
@@ -19,6 +21,14 @@ const ProductDetail = () => {
       if (meta) meta.setAttribute("content", product.description.slice(0, 155));
     }
   }, [product]);
+
+  if (isLoading) {
+    return (
+      <Layout>
+        <div className="container py-20 text-center text-muted-foreground">Memuat...</div>
+      </Layout>
+    );
+  }
 
   if (!product) {
     return (
@@ -33,7 +43,7 @@ const ProductDetail = () => {
 
   const productUrl = typeof window !== "undefined" ? window.location.href : "";
   const cat = categories.find((c) => c.id === product.category);
-  const related = products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
+  const related = all.filter((p) => p.id !== product.id).slice(0, 4);
 
   const onShare = async () => {
     try {

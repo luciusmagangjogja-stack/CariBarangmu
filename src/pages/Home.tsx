@@ -2,11 +2,13 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Search, Megaphone } from "lucide-react";
 import { Layout } from "@/components/marketplace/Layout";
 import { ProductCard } from "@/components/marketplace/ProductCard";
-import { categories, products, socials } from "@/data/products";
+import { categories, socials } from "@/data/products";
+import { useProducts } from "@/hooks/useProducts";
 import hero from "@/assets/hero-banner.jpg";
 
 const Home = () => {
-  const latest = [...products].sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 6);
+  const { data: products = [] } = useProducts();
+  const latest = products.slice(0, 6);
   return (
     <Layout>
       {/* HERO */}

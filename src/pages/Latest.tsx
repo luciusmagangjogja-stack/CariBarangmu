@@ -1,9 +1,9 @@
 import { Layout } from "@/components/marketplace/Layout";
 import { ProductCard } from "@/components/marketplace/ProductCard";
-import { products } from "@/data/products";
+import { useProducts } from "@/hooks/useProducts";
 
 const Latest = () => {
-  const sorted = [...products].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+  const { data: sorted = [] } = useProducts();
   return (
     <Layout>
       <section className="container py-6 md:py-10">

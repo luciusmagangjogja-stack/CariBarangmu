@@ -3,7 +3,7 @@ import { formatPrice, buildWhatsappLink } from "@/data/products";
 
 describe("formatPrice", () => {
   it("formats rupiah without decimals", () => {
-    expect(formatPrice(1500000)).toBe("Rp 1.500.000");
+    expect(formatPrice(1500000).replace(/ /g, " ")).toBe("Rp 1.500.000");
   });
 });
 
